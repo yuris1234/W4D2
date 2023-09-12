@@ -1,3 +1,6 @@
+require "byebug"
+require_relative "./employee"
+
 class Manager < Employee
     attr_reader :employees
 
@@ -7,14 +10,34 @@ class Manager < Employee
     end
 
     def bonus(multiplier)
-        dup = employees.dup
-        total = bonus_recursive(dup)
-        b = total * multiplier
-        b
+        @salary = bonus_recursive(employees)
+        # p @salary
+        super(multiplier)
+        # @salary = salary_holder
+
     end
 
     def bonus_recursive(employees)
         return 0 if employees.empty?
-        employees[0].salary + bonus_recursive(employees[1..-1])
+        sum = 0
+        employees.each do |emp|
+            if emp.is_a?(Manager)
+                sum += (bonus_recursive(emp.employees) + emp.salary)
+            else
+                sum += emp.salary 
+            end
+        end
+        # p sum
+        sum
+        # employees[0].salary + bonus_recursive(employees[1..-1])
     end
 end
+
+p david = Employee.new("David", "TA", 10000, "Darren")
+p shawna = Employee.new("Shawna", "TA", 12000, "Darren")
+p darren = Manager.new("Darren", "TA Manager", 78000, "Ned", [shawna, david])
+p ned = Manager.new("Ned", "Founder", 1000000, nil, [darren])
+
+p ned.bonus(5)
+p darren.bonus(4)
+p david.bonus(3)
