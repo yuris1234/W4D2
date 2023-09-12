@@ -3,6 +3,7 @@ module Slideable
     DIAGONAL_DIRS = [[-1,1],[1,1],[1,-1],[-1,-1]]
 
     def horizontal_dirs
+        # array of all horizontal directions
         HORIZONTAL_DIRS
     end
 
@@ -10,7 +11,22 @@ module Slideable
         DIAGONAL_DIRS
     end
 
+    def moves 
+        # return all possible moves as an array
+        possible_moves = []
+        horizontal_dirs.each do |dir|
+            # calling helper method on specific direction to return arr of possible moves
+            possible_moves += grow_unblocked_moves_in_dir(dir)
+        end
+        diagonal_dirs.each do |dir|
+            possible_moves += grow_unblocked_moves_in_dir(dir)
+        end
+
+        possible_moves
+    end
+
     def grow_unblocked_moves_in_dir(dir)
+        # return an array of all possible moves in one direction
         dir_row, dir_col = dir
         current_row, current_col = self.pos
         current_row += dir_row
@@ -29,6 +45,6 @@ module Slideable
     end
 
     def move_dirs 
-
+       print "Remember to write move_dirs in your subclass!"
     end
 end
