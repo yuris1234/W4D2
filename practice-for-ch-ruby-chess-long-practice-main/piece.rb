@@ -9,6 +9,22 @@ class Piece
 
     end
 
+    def empty?
+
+    end
+
+    def valid_moves
+
+    end
+
+    def pos=(value)
+
+    end
+
+    def move_into_check?(end_pos)
+
+    end
+
 
 
     # def inspect 

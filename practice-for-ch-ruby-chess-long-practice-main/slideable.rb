@@ -11,14 +11,10 @@ module Slideable
         DIAGONAL_DIRS
     end
 
-    def moves 
+    def moves(array)
         # return all possible moves as an array
         possible_moves = []
-        horizontal_dirs.each do |dir|
-            # calling helper method on specific direction to return arr of possible moves
-            possible_moves += grow_unblocked_moves_in_dir(dir)
-        end
-        diagonal_dirs.each do |dir|
+        array.each do |dir|
             possible_moves += grow_unblocked_moves_in_dir(dir)
         end
 
@@ -37,7 +33,7 @@ module Slideable
             current_col += dir_col
             current_row += dir_row
             if !(0..7).include?(current_col) || !(0..7).include?(current_row)
-                next
+                break
             end
         end
 
