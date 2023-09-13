@@ -22,7 +22,8 @@ module Slideable
     end
 
     def grow_unblocked_moves_in_dir(dir)
-        # return an array of all possible moves in one direction
+        # get rid of parameter, use self.move_dirs in this method
+        # should check for color of piece and invalid move
         dir_row, dir_col = dir
         current_row, current_col = self.pos
         current_row += dir_row
@@ -41,6 +42,7 @@ module Slideable
     end
 
     def move_dirs 
+        # raise error
        print "Remember to write move_dirs in your subclass!"
     end
 end

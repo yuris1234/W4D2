@@ -1,6 +1,7 @@
 module Stepable
     def moves 
-        # returns an array of all possible moves
+        # use self.move_dirs in this method
+        # should check color of next pos or invalid pos
         row, col = self.pos
         holder = []
         moves_diffs.each do |dir|
