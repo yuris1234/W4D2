@@ -3,6 +3,7 @@ require "byebug"
 require_relative "piece_classes"
 
 class Board
+    attr_accessor :rows
     def initialize
         @rows = populate_board
         @null_piece = NullPiece.instance 
@@ -110,7 +111,7 @@ class Board
     end
 
     private
-    attr_reader :null_piece, :rows
+    attr_reader :null_piece
 end
 
 b = Board.new 
