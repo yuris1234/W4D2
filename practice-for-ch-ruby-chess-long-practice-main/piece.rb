@@ -31,7 +31,8 @@ class Piece
 
 
 
-    # def inspect 
-    #     "piece"
-    # end
+    def inspect 
+        print "#{color} and #{pos}" 
+        puts
+    end
 end

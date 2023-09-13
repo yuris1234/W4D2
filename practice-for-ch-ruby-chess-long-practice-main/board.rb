@@ -1,5 +1,6 @@
 require_relative "./piece.rb"
 require "byebug"
+require_relative "piece_classes"
 
 class Board
     def initialize
@@ -8,9 +9,9 @@ class Board
     end
 
     def add_piece(pos, color)
-        debugger
+        # debugger
         row, col = pos
-        debugger
+        # debugger
         case col
         when 0 || 7
             return Rook.new(color, self, [row,col])
@@ -39,12 +40,12 @@ class Board
         grid = Array.new(8) { Array.new(8, null_piece) }
         # debugger
         grid[7].each_index do |col|
-            debugger
+            # debugger
             add_piece([7, col], :white)
             # grid[7][col] = add_piece([7, col], :white)
         end
 
-        grid[0].each_index do |row|
+        grid[0].each_index do |col|
             grid[0][col] = add_piece([0, col], :black)
         end
 
@@ -91,12 +92,18 @@ class Board
         @rows 
     end
 
+    def print_board
+        @rows.each do |row|
+            puts row.join(" ")
+        end
+    end
+
     private
     attr_reader :null_piece
 end
 
 b = Board.new 
-p b 
+b.print_board
 # pos = [0, 0]
 # p b.[]([0,0])
 # p b[[3,3]]
