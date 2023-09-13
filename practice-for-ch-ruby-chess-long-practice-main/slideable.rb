@@ -13,9 +13,10 @@ module Slideable
         possible_moves = []
         self.move_dirs.each do |dir|
             possible_moves += grow_unblocked_moves_in_dir(dir)
+            p dir
         end
 
-        possible_moves
+        p possible_moves
     end
 
     private 
@@ -27,19 +28,18 @@ module Slideable
         current_row += dir_row
         current_row += dir_col
         unoccupied = []
-        until !(0..7).include?(current_col) || !(0..7).include?(current_row)
-            occupied << [current_row, current_col]
+        until !self.board.valid_pos?([current_row,current_col])
+            possible_piece = self.board[[current_row, current_col]]
+            if possible_piece == NullPiece.instance
+                unoccupied << [current_row, current_col] 
+            elsif possible_piece.color == self.color
+                break
+            elsif possible_piece.color != self.color 
+                unoccupied << [current_row, current_col] 
+                break
+            end
             current_col += dir_col
             current_row += dir_row
-            possible_piece = self.board[current_row, current_col]
-            if possible_piece != nil
-                if possible_piece.color == self.color
-                    break
-                elsif possible_piece.color != self.color 
-                    occupied << [current_row, current_col] 
-                    break
-                end
-            end
         end
 
         unoccupied

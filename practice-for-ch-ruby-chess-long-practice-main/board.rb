@@ -84,6 +84,7 @@ class Board
     def move_piece(start_pos, end_pos)
         raise if !valid_pos?(end_pos) || !valid_pos?(start_pos)
         moving_piece = self[start_pos]
+        # p moving_piece.moves
         raise if !moving_piece.moves.include?(end_pos)
         self[end_pos] = self[start_pos]
         self[start_pos] = NullPiece.instance
@@ -115,6 +116,8 @@ b = Board.new
 # b.print_board
 b.print_board
 b.move_piece([7,1],[5,2])
+b.print_board
+b.move_piece([7,0],[7,1])
 b.print_board
 # pos = [0, 0]
 # p b.[]([0,0])
