@@ -4,7 +4,7 @@ require "byebug"
 class Board
     def initialize
         @rows = populate_board
-        @null_piece = NullPiece.new
+        @null_piece = NullPiece.instance
     end
 
     def add_piece(pos, color)
