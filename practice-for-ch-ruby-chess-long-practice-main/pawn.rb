@@ -1,6 +1,6 @@
 class Pawn < Piece
     def symbol
-
+        "♙"
     end
 
     def moves
@@ -42,11 +42,13 @@ class Pawn < Piece
     def side_attacks
         # actually using forward_dir to figure out diagonal steps
         row, col = self.pos
+
         holder = []
         right_diagonal = [row+forward_dir, col-1]
-        right_piece = self.board[row+forward_dir, col-1]
+        right_piece = self.board[[row+forward_dir, col-1]]
         left_diagonal = [row+forward_dir, col+1]
-        left_piece = self.board[row+forward_dir, col+1]
+        left_piece = self.board[[row+forward_dir, col+1]]
+
         if self.board.valid_pos?(right_diagonal) && right_piece.color == self.color
             holder << right_diagonal
         elsif self.board.valid_pos?(left_diagonal) && left_piece.color == self.color

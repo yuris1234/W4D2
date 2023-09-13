@@ -5,7 +5,7 @@ require_relative "piece_classes"
 class Board
     def initialize
         @rows = populate_board
-        @null_piece = NullPiece.instance
+        @null_piece = NullPiece.instance 
     end
 
     def add_piece(pos, color)
@@ -43,7 +43,7 @@ class Board
 
     def populate_board
         # debugger
-        grid = Array.new(8) { Array.new(8, null_piece) }
+        grid = Array.new(8) { Array.new(8, NullPiece.instance) }
         # debugger
         grid[7].each_index do |col|
             # debugger
@@ -61,6 +61,7 @@ class Board
     end
 
     def [](pos)
+        # debugger
         row, col = pos
         @rows[row][col]
     end
@@ -76,10 +77,16 @@ class Board
         true
     end
 
+    def has_piece?(pos)
+        self[pos] != NullPiece.instance 
+    end
+
     def move_piece(start_pos, end_pos)
-        raise if @rows[start_pos] == nil || !valid_pos?(end_pos)
+        raise if !valid_pos?(end_pos) || !valid_pos?(start_pos)
+        moving_piece = self[start_pos]
+        raise if !moving_piece.moves.include?(end_pos)
         self[end_pos] = self[start_pos]
-        self[start_pos] = nil
+        self[start_pos] = NullPiece.instance
     end
 
     def checkmate?(color)
@@ -94,22 +101,20 @@ class Board
 
     end
 
-    def inspect 
-        @rows 
-    end
-
     def print_board
-        print @rows
         @rows.each do |row|
-            print row.join(" ")
+            puts row.join(" ")
         end
     end
 
     private
-    attr_reader :null_piece
+    attr_reader :null_piece, :rows
 end
 
 b = Board.new 
+# b.print_board
+b.print_board
+b.move_piece([7,1],[5,2])
 b.print_board
 # pos = [0, 0]
 # p b.[]([0,0])

@@ -7,6 +7,10 @@ class Piece
         @pos = pos
     end
 
+    def to_s
+        "#{symbol}"
+    end
+
     def moves
 
     end
@@ -30,9 +34,4 @@ class Piece
     end
 
 
-
-    def inspect 
-        print "#{color} at  #{pos} position" 
-        puts
-    end
 end
