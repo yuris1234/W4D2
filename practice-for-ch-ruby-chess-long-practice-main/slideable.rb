@@ -1,7 +1,4 @@
 module Slideable
-    HORIZONTAL_DIRS = [[-1,0],[1,0],[0,1],[0,-1]]
-    DIAGONAL_DIRS = [[-1,1],[1,1],[1,-1],[-1,-1]]
-
     def horizontal_dirs
         # array of all horizontal directions
         HORIZONTAL_DIRS
@@ -21,15 +18,19 @@ module Slideable
         possible_moves
     end
 
+    private 
+    HORIZONTAL_DIRS = [[-1,0],[1,0],[0,1],[0,-1]]
+    DIAGONAL_DIRS = [[-1,1],[1,1],[1,-1],[-1,-1]]
     def grow_unblocked_moves_in_dir(dir)
-        # get rid of parameter, use self.move_dirs in this method
-        # should check for color of piece and invalid move
         dir_row, dir_col = dir
         current_row, current_col = self.pos
         current_row += dir_row
         current_row += dir_col
         unoccupied = []
         until !(0..7).include?(current_col) || !(0..7).include?(current_row)
+            occupied << [current_row, current_col]
+            current_col += dir_col
+            current_row += dir_row
             possible_piece = self.board[current_row, current_col]
             if possible_piece != nil
                 if possible_piece.color == self.color
@@ -39,9 +40,6 @@ module Slideable
                     break
                 end
             end
-            occupied << [current_row, current_col]
-            current_col += dir_col
-            current_row += dir_row
         end
 
         unoccupied

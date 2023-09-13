@@ -1,18 +1,24 @@
 module Stepable
     def moves 
-        # use self.move_dirs in this method
-        # should check color of next pos or invalid pos
         row, col = self.pos
         holder = []
-        moves_diffs.each do |dir|
+        self.moves_diffs.each do |dir|
             dir_row, dir_col = dir 
-            new_row = row +dir_row 
+            new_row = row + dir_row 
             new_col = col + dir_col 
-            holder << [new_row, new_col] if self.board[new_row, new_col] != nil && self.board.is_valid?([new_row,new_col])
+            possible_piece = self.board[[new_row,new_col]]
+            if possible_piece != nil 
+                if possible_piece.color != self.color 
+                    holder << [new_row,new_col]
+                end
+            elsif self.board.is_valid?([new_row,new_col])
+                holder << [new_row,new_col]
+            end
         end
         holder 
     end
 
+    private
     def moves_diffs
         print "Remember to implement moves_diffs!"
     end
