@@ -30,9 +30,6 @@ module Slideable
         current_row += dir_col
         unoccupied = []
         until !(0..7).include?(current_col) || !(0..7).include?(current_row)
-            occupied << [current_row, current_col]
-            current_col += dir_col
-            current_row += dir_row
             possible_piece = self.board[current_row, current_col]
             if possible_piece != nil
                 if possible_piece.color == self.color
@@ -42,6 +39,9 @@ module Slideable
                     break
                 end
             end
+            occupied << [current_row, current_col]
+            current_col += dir_col
+            current_row += dir_row
         end
 
         unoccupied
