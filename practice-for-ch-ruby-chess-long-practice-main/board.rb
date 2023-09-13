@@ -11,47 +11,41 @@ class Board
         row, col = pos
         case col
         when 0 || 7
-            return Rook.new(color, board, [row,col])
+            return Rook.new(color, self, [row,col])
         when 1 || 6
-            return Knight.new(color, board, [row,col])
+            return Knight.new(color, self, [row,col])
         when 2 || 5
-            return Bishop.new(color, board, [row,col])
+            return Bishop.new(color, self, [row,col])
         when 3 
-            return Queen.new(color, board, [row,col])
+            return Queen.new(color, self, [row,col])
         when 4 
-            return King.new(color, board, [row,col])
+            return King.new(color, self, [row,col])
+        end
+    end
+
+    def add_pawns(grid)
+        grid[1].each_index do |col|
+            grid[1][col] = Pawn.new(:black, self, [1, col])
+        end
+        grid[6].each_index do |col|
+            grid[6][col] = Pawn.new(:white, self, [6, col])
         end
     end
 
     def populate_board
         grid = Array.new(8) { Array.new(8, null_piece) }
 
-        grid[7].each do |row|
-            col = 0
-
-            while col <= 7
-                grid[row][col] = add_piece([row, col], :white)
-                col += 1
-            end
+        grid[7].each_index do |col|
+            grid[7][col] = add_piece([7, col], :white)
         end
-        grid[0].each do |row|
-            col = 0
 
-            while col <= 7
-                grid[row][col] = add_piece([row, col], :black)
-                col += 1
-            end
+        grid[0].each_index do |row|
+            grid[0][col] = add_piece([0, col], :black)
         end
-        # @rows = Array.new(8) { Array.new(8, NullPiece.new) }
-        # @rows.each_with_index do |row, i|
-        #     @rows.each_with_index do |col, j|
-        #         if (0..1).include?(i) || (6..7).include?(i)
-        #             @rows[i][j] = Piece.new
-        #         else
-        #             @rows[i][j] = nil
-        #         end
-        #     end
-        # end
+
+        add_pawns(grid)
+    
+        grid 
     end
 
     def [](pos)
@@ -98,9 +92,9 @@ class Board
     attr_reader :null_piece
 end
 
-b = Board.new 
-p b 
-pos = [0, 0]
-p b.[]([0,0])
-p b[[3,3]]
-p b[[7,7]]
+# b = Board.new 
+# p b 
+# pos = [0, 0]
+# p b.[]([0,0])
+# p b[[3,3]]
+# p b[[7,7]]
