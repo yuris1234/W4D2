@@ -10,17 +10,16 @@ module Stepable
             if !self.board.valid_pos?([new_row,new_col])
                 next
             end
-
             possible_piece = self.board[[new_row,new_col]]
-            if possible_piece != nil 
-                if possible_piece.color != self.color 
-                    holder << [new_row,new_col]
-                end
-            elsif self.board.valid_pos?([new_row,new_col])
+            if possible_piece == NullPiece.instance
+                holder << [new_row, new_col]
+            elsif possible_piece.color != self.color 
                 holder << [new_row,new_col]
+            else
+                next 
             end
         end
-        p holder
+        # p holder
         holder 
     end
 

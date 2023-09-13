@@ -24,7 +24,7 @@ class Piece
     end
 
     def pos=(value)
-
+        @pos = value
     end
 
     private

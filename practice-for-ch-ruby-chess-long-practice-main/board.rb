@@ -88,6 +88,7 @@ class Board
         raise if !moving_piece.moves.include?(end_pos)
         self[end_pos] = self[start_pos]
         self[start_pos] = NullPiece.instance
+        self[end_pos].pos = end_pos
     end
 
     def checkmate?(color)
@@ -114,10 +115,20 @@ end
 
 b = Board.new 
 # b.print_board
-b.print_board
+# b.print_board
 b.move_piece([7,1],[5,2])
-b.print_board
+# b.print_board
 b.move_piece([7,0],[7,1])
+# b.print_board
+b.move_piece([1,4],[3,4])
+# b.print_board
+b.move_piece([0,4],[1,4])
+# b.print_board
+b.move_piece([1,4],[2,4])
+# b.print_board
+b.move_piece([1,5],[3,5])
+b.move_piece([0,3],[3,6])
+b.move_piece([3,6],[6,6])
 b.print_board
 # pos = [0, 0]
 # p b.[]([0,0])
