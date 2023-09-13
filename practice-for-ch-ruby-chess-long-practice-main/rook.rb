@@ -3,6 +3,6 @@ class Rook < Piece
 
     def move_dirs
         # return applicable module consatnts
-        moves(horizontal_dirs)
+        horizontal_dirs
     end
 end

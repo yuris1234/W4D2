@@ -11,10 +11,10 @@ module Slideable
         DIAGONAL_DIRS
     end
 
-    def moves(array)
+    def moves
         # return all possible moves as an array
         possible_moves = []
-        array.each do |dir|
+        self.move_dirs.each do |dir|
             possible_moves += grow_unblocked_moves_in_dir(dir)
         end
 
@@ -29,12 +29,18 @@ module Slideable
         current_row += dir_row
         current_row += dir_col
         unoccupied = []
-        until self.board[[current_row, current_col]] != nil
+        until !(0..7).include?(current_col) || !(0..7).include?(current_row)
             occupied << [current_row, current_col]
             current_col += dir_col
             current_row += dir_row
-            if !(0..7).include?(current_col) || !(0..7).include?(current_row)
-                break
+            possible_piece = self.board[current_row, current_col]
+            if possible_piece != nil
+                if possible_piece.color == self.color
+                    break
+                elsif possible_piece.color != self.color 
+                    occupied << [current_row, current_col] 
+                    break
+                end
             end
         end
 
@@ -42,7 +48,6 @@ module Slideable
     end
 
     def move_dirs 
-        # raise error
-       print "Remember to write move_dirs in your subclass!"
+        raise NoImplementError
     end
 end
