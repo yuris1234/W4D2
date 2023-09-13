@@ -13,16 +13,22 @@ class Board
         row, col = pos
         # debugger
         case col
-        when 0 || 7
+        when 0 
             return Rook.new(color, self, [row,col])
-        when 1 || 6
+        when 1 
             return Knight.new(color, self, [row,col])
-        when 2 || 5
+        when 2 
             return Bishop.new(color, self, [row,col])
         when 3 
             return Queen.new(color, self, [row,col])
         when 4 
             return King.new(color, self, [row,col])
+        when 5 
+            return Bishop.new(color,self,[row,col])
+        when 6
+            return Knight.new(color, self, [row,col])
+        when 7
+            return Rook.new(color, self, [row,col])
         end
     end
 
@@ -41,7 +47,7 @@ class Board
         # debugger
         grid[7].each_index do |col|
             # debugger
-            add_piece([7, col], :white)
+            grid[7][col] = add_piece([7, col], :white)
             # grid[7][col] = add_piece([7, col], :white)
         end
 
@@ -93,8 +99,9 @@ class Board
     end
 
     def print_board
+        print @rows
         @rows.each do |row|
-            puts row.join(" ")
+            print row.join(" ")
         end
     end
 

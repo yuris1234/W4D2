@@ -32,7 +32,7 @@ class Piece
 
 
     def inspect 
-        print "#{color} and #{pos}" 
+        print "#{color} at  #{pos} position" 
         puts
     end
 end
