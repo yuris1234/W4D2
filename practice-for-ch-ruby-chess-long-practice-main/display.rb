@@ -12,20 +12,28 @@ class Display
     def render
         board.rows.each_with_index do |row,  row_i|
             row.each_with_index do |col, col_i|
-                if row_i.even?
+                if (col_i+row_i).even?
                     if col.color == :white 
-                        puts board[[row_i,col_i]].colorize(:color => :white, :background => :white)
+                        print board[[row_i,col_i]].to_s.colorize(:color => :white, :background => :white)
                     else
-                        puts board[[row_i,col_i]].colorize(:color => :black, :background => :white)
+                        print board[[row_i,col_i]].to_s.colorize(:color => :black, :background => :white)
                     end
                 else
                     if col.color == :white 
-                        puts board[[row_i,col_o]].colorize(:color => :white, :background => :black)
+                        print board[[row_i,col_i]].to_s.colorize(:color => :white, :background => :black)
                     else
-                        puts board[[row_i,col_o]].colorize(:color => :black, :background => :black)
+                        print board[[row_i,col_i]].to_s.colorize(:color => :black, :background => :black)
                     end
                 end
             end
+            puts
+        end
+    end
+
+    def play
+        while true 
+            render 
+            cursor.get_input
         end
     end
 end
@@ -52,4 +60,4 @@ b.print_board
 # p b[[3,3]]
 # p b[[7,7]]
 d = Display.new(b)
-d.render
+d.play
