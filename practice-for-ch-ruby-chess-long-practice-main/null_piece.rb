@@ -1,8 +1,10 @@
 require_relative "piece"
+require "singleton"
 
 class NullPiece < Piece
-    def initialize
-        
+    include Singleton
+    def initialize(color=nil)
+        @color = color
     end
 
     def moves
